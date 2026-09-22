@@ -1,0 +1,42 @@
+HDR LOUDNESS TEST — VERIFICATION RECORD
+=======================================
+
+Files
+-----
+interrobang-sdr.png
+  File SHA-256: 239d1a2a10ef497020fb58a507add963fb1857f1f8d5a262b81fa5817e8a683e
+  ICC profile: sRGB IEC61966-2.1
+
+interrobang-hdr.png
+  File SHA-256: 4151d643107bc6de12a337b20f6a4036009d5588010a38ceae04ec74d14a84c7
+  ICC profile: Rec2020 Gamut with PQ Transfer
+
+Identity checks
+---------------
+Dimensions: 100 x 100 for both files
+Color type: 8-bit RGBA for both files
+Decoded RGBA pixels: identical
+Decoded RGBA SHA-256:
+  6965f593d74425378b8072c6904714cf8abfc17191491f53fc8370910a3b8680
+
+Compressed PNG image data (IDAT): byte-for-byte identical
+IDAT SHA-256:
+  81807b22462f987a19337d9f8b930d797bc896f363162e516042ea22c73ee71b
+
+PNG chunks in both files:
+  IHDR, iCCP, IDAT, IEND
+
+IHDR: identical
+IDAT: identical
+IEND: identical
+iCCP: different (the intended sRGB vs. Rec.2020/PQ profile change)
+
+Conclusion
+----------
+The two files contain the same stored image samples. The only differing PNG
+chunk is iCCP, which contains the embedded ICC color profile. Any display
+difference produced by a color-managed browser is therefore attributable to
+the interpretation selected by the profiles, not to different pixel artwork.
+
+Reproduce this check with:
+  python3 scripts/verify_images.py interrobang-sdr.png interrobang-hdr.png

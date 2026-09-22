@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="An HDR loudness test using identical PNG pixels tagged with sRGB and Rec.2020/PQ ICC profiles.">
+    <title>HDR Loudness Test — Same Pixels, Different Profiles</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='25' font-weight='800' fill='white'%3E%E2%80%BD%3C/text%3E%3C/svg%3E">
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #191919;
+        color: #f2f2f2;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-width: 280px;
+        background: #191919;
+      }
+
+      main {
+        width: min(100% - 32px, 720px);
+        margin: 0 auto;
+        padding: 56px 0 72px;
+      }
+
+      h1, h2, p { margin-top: 0; }
+
+      h1 {
+        max-width: 620px;
+        margin-bottom: 14px;
+        font-size: clamp(2rem, 7vw, 3.5rem);
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+
+      .intro {
+        max-width: 620px;
+        margin-bottom: 42px;
+        color: #bdbdbd;
+        font-size: 1.05rem;
+        line-height: 1.6;
+      }
+
+      .comparison {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: clamp(24px, 10vw, 72px);
+        margin: 0 0 38px;
+        padding: 32px 16px;
+        border: 1px solid #3b3b3b;
+        border-radius: 14px;
+        background: #242424;
+      }
+
+      figure {
+        display: grid;
+        justify-items: center;
+        gap: 14px;
+        width: 132px;
+        margin: 0;
+        text-align: center;
+      }
+
+      img {
+        display: block;
+        width: 100px;
+        height: 100px;
+      }
+
+      figcaption {
+        min-height: 2.8em;
+        font-size: 0.9rem;
+        font-weight: 700;
+        line-height: 1.4;
+      }
+
+      .direct-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        margin: 0 0 34px;
+      }
+
+      a { color: #8fc8ff; }
+      a:hover { color: #c4e2ff; }
+      a:focus-visible { outline: 2px solid #8fc8ff; outline-offset: 4px; }
+
+      .explanation, .fallback-note, .technical {
+        font-size: 1rem;
+        line-height: 1.65;
+      }
+
+      .fallback-note {
+        margin: 24px 0 42px;
+        padding-left: 16px;
+        border-left: 3px solid #707070;
+        color: #d2d2d2;
+      }
+
+      .technical {
+        padding-top: 30px;
+        border-top: 1px solid #3b3b3b;
+        color: #bdbdbd;
+      }
+
+      .technical h2 {
+        color: #f2f2f2;
+        font-size: 1.25rem;
+      }
+
+      code {
+        color: #ededed;
+        font-size: 0.9em;
+        overflow-wrap: anywhere;
+      }
+
+      .proof {
+        width: 100%;
+        margin: 24px 0;
+        border-collapse: collapse;
+        color: #e8e8e8;
+        font-size: 0.9rem;
+      }
+
+      .proof th, .proof td {
+        padding: 12px 10px;
+        border-bottom: 1px solid #3b3b3b;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .proof th:first-child { padding-left: 0; }
+      .proof td:last-child, .proof th:last-child { padding-right: 0; }
+
+      .match { color: #a8e6bd; }
+      .different { color: #ffd392; }
+
+      @media (max-width: 420px) {
+        main { width: min(100% - 20px, 720px); padding-top: 36px; }
+        .comparison { gap: 4px; padding-inline: 4px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HDR can be visually louder.</h1>
+      <p class="intro">A controlled test of how color metadata can make an otherwise identical image stand out like a lantern on an HDR-capable display.</p>
+
+      <section class="comparison" aria-label="Side-by-side image comparison">
+        <figure>
+          <img src="interrobang-sdr.png" width="100" height="100" alt="White interrobang on black, tagged with an sRGB profile">
+          <figcaption>Standard SDR</figcaption>
+        </figure>
+        <figure>
+          <img src="interrobang-hdr.png" width="100" height="100" alt="White interrobang on black, tagged with a Rec.2020 PQ profile">
+          <figcaption>Rec.2020 PQ HDR</figcaption>
+        </figure>
+      </section>
+
+      <p class="explanation">These images have identical decoded RGB pixel values. The HDR version differs by having a Rec.2020/PQ ICC color profile. On a compatible HDR/EDR display and browser, its white areas may appear physically brighter than ordinary SDR white. A screenshot may not preserve the visible luminance difference.</p>
+
+      <nav class="direct-links" aria-label="Direct image links">
+        <a href="interrobang-sdr.png">Open SDR image directly</a>
+        <a href="interrobang-hdr.png">Open HDR image directly</a>
+      </nav>
+
+      <p class="fallback-note">If both images look identical, the browser, display, or operating system may not be presenting the PQ image in extended dynamic range.</p>
+
+      <section class="technical">
+        <h2>Why this exists</h2>
+        <p>An HDR image encountered in otherwise ordinary webpage content can command attention in the way a louder advertisement cuts through surrounding audio. This demonstration explores that “HDR loudness” effect—not as a recommendation, but as a reproducible example of why HDR/EDR web imagery could be unusually attention-grabbing.</p>
+
+        <h2>Pixel identity proof</h2>
+        <p>The comparison is made before color management. A verifier removes PNG scanline filters, compares every stored RGBA sample, compares the compressed image-data bytes, and then compares every PNG chunk other than the profile.</p>
+        <table class="proof">
+          <thead>
+            <tr><th scope="col">Check</th><th scope="col">Result</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Dimensions</th><td class="match">Match — 100×100</td></tr>
+            <tr><th scope="row">Decoded RGBA samples</th><td class="match">Match — all 10,000 pixels</td></tr>
+            <tr><th scope="row"><code>IDAT</code> bytes</th><td class="match">Match — byte for byte</td></tr>
+            <tr><th scope="row"><code>IHDR</code> and <code>IEND</code></th><td class="match">Match — byte for byte</td></tr>
+            <tr><th scope="row"><code>iCCP</code> profile</th><td class="different">Different — sRGB vs. Rec.2020/PQ</td></tr>
+          </tbody>
+        </table>
+        <p>Matching decoded RGBA SHA-256:<br><code>6965f593d74425378b8072c6904714cf8abfc17191491f53fc8370910a3b8680</code></p>
+        <p>Matching compressed <code>IDAT</code> SHA-256:<br><code>81807b22462f987a19337d9f8b930d797bc896f363162e516042ea22c73ee71b</code></p>
+        <p><a href="verification.txt">Read the full verification record</a></p>
+      </section>
+    </main>
+  </body>
+</html>
