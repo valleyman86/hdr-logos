@@ -8,7 +8,7 @@ profiles: sRGB and Rec.2020/PQ.
 Matching decoded RGBA SHA-256:
 
 ```text
-6965f593d74425378b8072c6904714cf8abfc17191491f53fc8370910a3b8680
+6a49a9e642e713eaa478e1752fd3d5d095da1552006203b349589183d563763c
 ```
 
 Verify locally:

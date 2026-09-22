@@ -1,7 +1,7 @@
 import AppKit
 
-let width = 100
-let height = 100
+let width = 200
+let height = 200
 let output = CommandLine.arguments.count > 1 ? CommandLine.arguments[1] : "source-symbol.png"
 
 guard let bitmap = NSBitmapImageRep(
@@ -31,19 +31,19 @@ NSRect(x: 0, y: 0, width: width, height: height).fill()
 let paragraph = NSMutableParagraphStyle()
 paragraph.alignment = .center
 let attributes: [NSAttributedString.Key: Any] = [
-    .font: NSFont.systemFont(ofSize: 78, weight: .black),
+    .font: NSFont.systemFont(ofSize: 156, weight: .black),
     .foregroundColor: NSColor.white,
     .paragraphStyle: paragraph,
 ]
 
 let symbol = NSAttributedString(string: "‽", attributes: attributes)
 let bounds = symbol.boundingRect(
-    with: NSSize(width: width, height: 120),
+    with: NSSize(width: width, height: 240),
     options: [.usesLineFragmentOrigin, .usesFontLeading]
 )
 let drawRect = NSRect(
     x: 0,
-    y: (CGFloat(height) - bounds.height) / 2 - 4,
+    y: (CGFloat(height) - bounds.height) / 2 - 8,
     width: CGFloat(width),
     height: bounds.height
 )
@@ -56,4 +56,3 @@ guard let png = bitmap.representation(using: .png, properties: [:]) else {
     fatalError("Could not encode PNG")
 }
 try png.write(to: URL(fileURLWithPath: output))
-

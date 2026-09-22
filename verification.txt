@@ -1,27 +1,27 @@
-HDR LOUDNESS TEST — VERIFICATION RECORD
-=======================================
+HDR IMAGE COMPARISON — VERIFICATION RECORD
+==========================================
 
 Files
 -----
 interrobang-sdr.png
-  File SHA-256: 239d1a2a10ef497020fb58a507add963fb1857f1f8d5a262b81fa5817e8a683e
+  File SHA-256: 9ad00b5436d9d52f2e7bf393d6582d987250ea2b3b24cdc57c94eb616ef10328
   ICC profile: sRGB IEC61966-2.1
 
 interrobang-hdr.png
-  File SHA-256: 4151d643107bc6de12a337b20f6a4036009d5588010a38ceae04ec74d14a84c7
+  File SHA-256: 5857ae4290e7b94d2110a751ce60c0e1c1436110679100f91898666699794be6
   ICC profile: Rec2020 Gamut with PQ Transfer
 
 Identity checks
 ---------------
-Dimensions: 100 x 100 for both files
+Dimensions: 200 x 200 for both files
 Color type: 8-bit RGBA for both files
 Decoded RGBA pixels: identical
 Decoded RGBA SHA-256:
-  6965f593d74425378b8072c6904714cf8abfc17191491f53fc8370910a3b8680
+  6a49a9e642e713eaa478e1752fd3d5d095da1552006203b349589183d563763c
 
 Compressed PNG image data (IDAT): byte-for-byte identical
 IDAT SHA-256:
-  81807b22462f987a19337d9f8b930d797bc896f363162e516042ea22c73ee71b
+  9ec567d3ed94fbea8640e7e7af9f259b1bd699ecc9138c0ac6938517beceb556
 
 PNG chunks in both files:
   IHDR, iCCP, IDAT, IEND
