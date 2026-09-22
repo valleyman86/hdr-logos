@@ -4,9 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="dark">
-    <meta name="description" content="A small experiment showing how an HDR image can appear much brighter than surrounding webpage content.">
-    <title>I Found HDR on an Ordinary Webpage</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='25' font-weight='800' fill='white'%3E%E2%80%BD%3C/text%3E%3C/svg%3E">
+    <title>SDR and HDR Image Comparison</title>
     <style>
       :root {
         color-scheme: dark;
@@ -16,159 +14,65 @@
       }
 
       * { box-sizing: border-box; }
-      body { margin: 0; background: #181818; }
 
-      main {
-        width: min(100% - 32px, 760px);
-        margin: 0 auto;
-        padding: 40px 0 64px;
-      }
-
-      h1, h2, p { margin-top: 0; }
-
-      h1 {
-        margin-bottom: 16px;
-        font-size: clamp(2rem, 7vw, 3.25rem);
-        line-height: 1.04;
-        letter-spacing: -0.04em;
-      }
-
-      .warning {
-        margin-bottom: 36px;
-        color: #d0d0d0;
-        font-size: 1.1rem;
-        line-height: 1.6;
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        background: #181818;
       }
 
       .comparison {
         display: flex;
         justify-content: center;
-        gap: clamp(24px, 8vw, 72px);
-        margin-bottom: 28px;
-        padding: 28px 8px;
-        border: 1px solid #3c3c3c;
-        border-radius: 12px;
-        background: #232323;
+        gap: clamp(32px, 9vw, 96px);
+        padding: 32px;
       }
 
       figure {
         display: grid;
         justify-items: center;
-        gap: 12px;
-        width: 220px;
+        gap: 16px;
         margin: 0;
-        text-align: center;
       }
 
-      img { display: block; width: 200px; height: 200px; }
+      img {
+        display: block;
+        width: 200px;
+        height: 200px;
+      }
 
       figcaption {
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 700;
-        line-height: 1.35;
       }
 
-      .note, .proof { font-size: 1rem; line-height: 1.6; }
-      .note { color: #c7c7c7; }
-
-      .links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px 22px;
-        margin: 22px 0 38px;
+      a {
+        color: #9bcfff;
+        font-size: 0.9rem;
       }
 
-      a { color: #94ccff; }
-      a:hover { color: #c8e5ff; }
-      a:focus-visible { outline: 2px solid #94ccff; outline-offset: 4px; }
+      a:hover { color: #d0e8ff; }
+      a:focus-visible { outline: 2px solid #9bcfff; outline-offset: 4px; }
 
-      .proof {
-        padding-top: 30px;
-        border-top: 1px solid #3c3c3c;
-      }
-
-      .proof h2 { margin-bottom: 10px; font-size: 1.3rem; }
-      .proof p { margin-bottom: 16px; color: #c7c7c7; }
-
-      .checks {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        gap: 8px 18px;
-        margin: 0 0 24px;
-      }
-
-      .checks dt { font-weight: 700; }
-      .checks dd { margin: 0; color: #b9e8c8; }
-
-      details {
-        padding: 14px 16px;
-        border: 1px solid #3c3c3c;
-        border-radius: 8px;
-      }
-
-      summary { cursor: pointer; font-weight: 700; }
-
-      pre {
-        overflow-x: auto;
-        margin: 16px 0 8px;
-        padding: 14px;
-        border-radius: 6px;
-        background: #0c0c0c;
-        color: #ededed;
-        font-size: 0.82rem;
-        line-height: 1.5;
-      }
-
-      @media (max-width: 540px) {
-        main { width: min(100% - 20px, 760px); padding-top: 30px; }
-        .comparison { flex-direction: column; align-items: center; gap: 28px; }
-        .checks { grid-template-columns: 1fr; gap: 2px; }
-        .checks dd { margin-bottom: 8px; }
+      @media (max-width: 520px) {
+        .comparison { flex-direction: column; gap: 32px; }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>I found HDR hiding in an ordinary webpage.</h1>
-      <p class="warning">I was scrolling through job listings when one logo looked much brighter than everything around it. I made this comparison to understand why.</p>
-
-      <section class="comparison" aria-label="Side-by-side image comparison">
-        <figure>
-          <img src="interrobang-sdr.png" width="200" height="200" alt="White interrobang on black, tagged with an sRGB profile">
-          <figcaption>Standard SDR</figcaption>
-        </figure>
-        <figure>
-          <img src="interrobang-hdr.png" width="200" height="200" alt="White interrobang on black, tagged with a Rec.2020 PQ profile">
-          <figcaption>Rec.2020 PQ HDR</figcaption>
-        </figure>
-      </section>
-
-      <p class="note">The files contain the same picture. Only the color profile differs. On an HDR-capable setup, the right image may appear noticeably brighter.</p>
-      <p class="note">That is mildly interesting—and a little concerning. HDR could make logos, ads, or other art demand more attention than nearby SDR content.</p>
-      <p class="note">If they look identical, your setup may not be showing the PQ image in extended dynamic range. Screenshots may also flatten the difference.</p>
-
-      <nav class="links" aria-label="Direct image links">
-        <a href="interrobang-sdr.png">Open SDR image</a>
-        <a href="interrobang-hdr.png">Open HDR image</a>
-      </nav>
-
-      <section class="proof">
-        <h2>Same image. Different profile.</h2>
-        <p>These are separate PNG files. Before color management, their image data is identical. Only the embedded ICC profile differs.</p>
-        <dl class="checks">
-          <dt>40,000 RGBA pixels</dt><dd>Identical</dd>
-          <dt>Compressed image data</dt><dd>Byte-for-byte identical</dd>
-          <dt>ICC profile</dt><dd>sRGB vs. Rec.2020/PQ</dd>
-        </dl>
-
-        <details>
-          <summary>Verify the files yourself</summary>
-          <pre><code>git clone https://github.com/valleyman86/hdr-logos.git
-cd hdr-logos
-python3 scripts/verify_images.py interrobang-sdr.png interrobang-hdr.png</code></pre>
-          <p>The public <a href="https://github.com/valleyman86/hdr-logos/blob/main/scripts/verify_images.py">verification script</a> fails if any decoded pixel, compressed image-data byte, or non-profile PNG chunk differs.</p>
-        </details>
-      </section>
+    <main class="comparison" aria-label="SDR and HDR image comparison">
+      <figure>
+        <img src="interrobang-sdr.png" width="200" height="200" alt="White interrobang on black, tagged with an sRGB profile">
+        <figcaption>Standard SDR</figcaption>
+        <a href="interrobang-sdr.png" download>Download SDR PNG</a>
+      </figure>
+      <figure>
+        <img src="interrobang-hdr.png" width="200" height="200" alt="White interrobang on black, tagged with a Rec.2020 PQ profile">
+        <figcaption>Rec.2020 PQ HDR</figcaption>
+        <a href="interrobang-hdr.png" download>Download HDR PNG</a>
+      </figure>
     </main>
   </body>
 </html>
