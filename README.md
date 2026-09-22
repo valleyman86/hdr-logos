@@ -1,6 +1,9 @@
-# Same Pixels, Different Color Profiles
+# HDR Images on the Web
 
-A minimal GitHub Pages experiment comparing two separate 100×100 PNG files:
+A concise warning and demonstration: HDR images can appear much brighter than
+surrounding SDR content on ordinary webpages.
+
+The comparison uses two separate 100×100 PNG files:
 
 - `interrobang-sdr.png` — sRGB ICC profile
 - `interrobang-hdr.png` — Rec.2020/PQ ICC profile
