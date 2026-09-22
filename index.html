@@ -18,16 +18,20 @@
       body {
         min-height: 100vh;
         margin: 0;
-        display: grid;
-        place-items: center;
         background: #181818;
+      }
+
+      main {
+        width: min(100% - 32px, 720px);
+        margin: 0 auto;
+        padding: 48px 0;
       }
 
       .comparison {
         display: flex;
         justify-content: center;
         gap: clamp(32px, 9vw, 96px);
-        padding: 32px;
+        padding: 0 32px 40px;
       }
 
       figure {
@@ -56,23 +60,83 @@
       a:hover { color: #d0e8ff; }
       a:focus-visible { outline: 2px solid #9bcfff; outline-offset: 4px; }
 
+      .proof {
+        max-width: 600px;
+        margin: 0 auto;
+        padding-top: 28px;
+        border-top: 1px solid #3a3a3a;
+      }
+
+      .proof h1 {
+        margin: 0 0 18px;
+        font-size: 1.25rem;
+      }
+
+      dl {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 8px 20px;
+        margin: 0 0 22px;
+      }
+
+      dt { font-weight: 700; }
+      dd { margin: 0; color: #b9e8c8; }
+
+      details {
+        padding: 12px 14px;
+        border: 1px solid #3a3a3a;
+        border-radius: 8px;
+      }
+
+      summary { cursor: pointer; font-weight: 700; }
+
+      pre {
+        overflow-x: auto;
+        margin: 14px 0 10px;
+        padding: 12px;
+        border-radius: 6px;
+        background: #0c0c0c;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
       @media (max-width: 520px) {
         .comparison { flex-direction: column; gap: 32px; }
+        dl { grid-template-columns: 1fr; gap: 2px; }
+        dd { margin-bottom: 8px; }
       }
     </style>
   </head>
   <body>
-    <main class="comparison" aria-label="SDR and HDR image comparison">
-      <figure>
-        <img src="interrobang-sdr.png" width="200" height="200" alt="White interrobang on black, tagged with an sRGB profile">
-        <figcaption>Standard SDR</figcaption>
-        <a href="interrobang-sdr.png" download>Download SDR PNG</a>
-      </figure>
-      <figure>
-        <img src="interrobang-hdr.png" width="200" height="200" alt="White interrobang on black, tagged with a Rec.2020 PQ profile">
-        <figcaption>Rec.2020 PQ HDR</figcaption>
-        <a href="interrobang-hdr.png" download>Download HDR PNG</a>
-      </figure>
+    <main>
+      <section class="comparison" aria-label="SDR and HDR image comparison">
+        <figure>
+          <img src="interrobang-sdr.png" width="200" height="200" alt="White interrobang on black, tagged with an sRGB profile">
+          <figcaption>Standard SDR</figcaption>
+          <a href="interrobang-sdr.png" download>Download SDR PNG</a>
+        </figure>
+        <figure>
+          <img src="interrobang-hdr.png" width="200" height="200" alt="White interrobang on black, tagged with a Rec.2020 PQ profile">
+          <figcaption>Rec.2020 PQ HDR</figcaption>
+          <a href="interrobang-hdr.png" download>Download HDR PNG</a>
+        </figure>
+      </section>
+
+      <section class="proof" aria-label="Image difference verification">
+        <h1>Same pixels. Different profile.</h1>
+        <dl>
+          <dt>Decoded RGBA</dt><dd>Identical</dd>
+          <dt>Compressed image data</dt><dd>Identical</dd>
+          <dt>ICC profile</dt><dd>sRGB vs. Rec.2020/PQ</dd>
+        </dl>
+        <details>
+          <summary>Run the diff</summary>
+          <pre><code>git clone https://github.com/valleyman86/hdr-logos.git
+cd hdr-logos
+python3 scripts/verify_images.py interrobang-sdr.png interrobang-hdr.png</code></pre>
+          <a href="https://github.com/valleyman86/hdr-logos/blob/main/scripts/verify_images.py">View the verifier</a>
+        </details>
+      </section>
     </main>
   </body>
 </html>
